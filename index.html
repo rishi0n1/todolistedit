@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+        body {
+          background-color: #f2f2f2;
+
+        }
+        #ip{
+          background-color: rgb(236, 224, 248);
+          padding: 5px;
+          width: 60%;
+          border-radius: 100px;
+          border: 2px solid #ccc;
+        }
+        .add_button{
+          background-color: rgb(10, 157, 242);
+          padding: 5px;
+          width: 50px;
+          border-radius: 50px;
+          border: 2px solid #ccc;
+
+        }
+        .add_button:hover{
+          background-color: rgb(85, 248, 10);
+        }
+        #ip:hover{
+          background-color: rgb(241, 205, 231);
+        }
+     
+       
+      </style>
+</head>
+<body>
+    <form id="frm">
+
+        <input type="text" id="ip" placeholder="add a your day rotinue">
+        <input type="submit" value="add" class="add_button">
+        
+    </form>
+    <ul id="list" class="l_1"></ul>
+   
+
+<script>
+    let form=document.getElementById("frm");
+    let ip=document.getElementById("ip");
+    let list=document.getElementById("list")
+  
+
+    form.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        let listItem=document.createElement("li");
+        listItem.innerText=ip.value;
+        list.appendChild(listItem);
+        ip.value=""
+        
+        let btn=document.createElement("button");
+        btn.addEventListener("click",()=>{
+            let conformation=window.confirm("are you sure you want to delete this item");
+        if(conformation){
+            list.removeChild(listItem);
+        }  
+        list.removeChild(listItem)})
+        btn.innerHTML="CLEAR";
+        listItem.appendChild(btn)
+       
+        list.appendChild(listItem)
+        ip.value=""
+        
+        // 
+            
+            
+        }
+    )
+        
+    
+   
+</script>
+</body>
+</html>
+ <!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" id="form">
+      <input type="text" id="ip1" />
+      <input type="submit" value="add" id="btn" />
+     
+    </form>
+    <ul id="list"></ul>
+    <script>
+      let form = document.getElementById("form");
+      let ip1 = document.getElementById("ip1");
+      let list = document.getElementById("list");
+      
+     
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let listItem = document.createElement("li");
+
+        listItem.innerText = ip1.value;
+        list.appendChild(listItem);
+        ip1.value = "";
+      });
+      let btn=document.createElement("button")
+      btn.addEventListener("click", ()=>{
+        listItem.innerText="delete"
+        button.removeChild(listItem)
+        listItem.appendChild(btn)
+        ip1.value=""
+        
+
+      })
+    </script>
+  </body>
+</html>  -->
