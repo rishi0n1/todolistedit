@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          background-color: #f2f2f2;
+        }
+        #ip {
+          background-color: rgb(236, 224, 248);
+          padding: 5px;
+          width: 60%;
+          border-radius: 100px;
+          border: 2px solid #ccc;
+        }
+        .add_button {
+          background-color: rgb(10, 157, 242);
+          padding: 5px;
+          width: 50px;
+          border-radius: 50px;
+          border: 2px solid #ccc;
+        }
+        .add_button:hover {
+          background-color: rgb(85, 248, 10);
+        }
+        #ip:hover {
+          background-color: rgb(241, 205, 231);
+        }
+        li {
+          margin: 10px 0;
+        }
+        button {
+          margin-left: 10px;
+          padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form id="frm">
+        <input type="text" id="ip" placeholder="Add your daily routine">
+        <input type="submit" value="Add" class="add_button">
+    </form>
+    <ul id="list" class="l_1"></ul>
+
+<script>
+    let form = document.getElementById("frm");
+    let ip = document.getElementById("ip");
+    let list = document.getElementById("list");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (ip.value.trim() === "") return;
+
+        let listItem = document.createElement("li");
+
+        // Create a span to hold the text
+        let textSpan = document.createElement("span");
+        textSpan.innerText = ip.value;
+        listItem.appendChild(textSpan);
+
+        // Create an input field for editing (hidden by default)
+        let editInput = document.createElement("input");
+        editInput.type = "text";
+        editInput.style.display = "none";
+        listItem.appendChild(editInput);
+
+        // Edit button
+        let editBtn = document.createElement("button");
+        editBtn.innerText = "EDIT";
+        editBtn.addEventListener("click", () => {
+            if (editInput.style.display === "none") {
+                // Switch to edit mode
+                editInput.value = textSpan.innerText;
+                textSpan.style.display = "none";
+                editInput.style.display = "inline-block";
+                editBtn.innerText = "SAVE";
+            } else {
+                // Save changes
+                textSpan.innerText = editInput.value;
+                textSpan.style.display = "inline";
+                editInput.style.display = "none";
+                editBtn.innerText = "EDIT";
+            }
+        });
+        listItem.appendChild(editBtn);
+
+        // Clear button
+        let clearBtn = document.createElement("button");
+        clearBtn.innerText = "CLEAR";
+        clearBtn.addEventListener("click", () => {
+            let confirmation = window.confirm("Are you sure you want to delete this item?");
+            if (confirmation) {
+                list.removeChild(listItem);
+            }
+        });
+        listItem.appendChild(clearBtn);
+
+        list.appendChild(listItem);
+        ip.value = "";
+    });
+</script>
+</body>
+</html>
+
